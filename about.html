@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Doggo Viewer • About</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>ℹ️ About This Project</h1>
+
+  <p>This mini‑site is built by <strong>Team Doggo‑Dev</strong> (three budding front‑end developers) for our API integration assignment. We use the free <a href="https://dog.ceo/dog-api/" target="_blank" rel="noopener">Dog CEO API</a> to fetch breed data and images.</p>
+
+  <h2>Tech Stack</h2>
+  <ul>
+    <li>👉 HTML5 &amp; vanilla JS (no frameworks)</li>
+    <li>👉 Responsive CSS with a shared file</li>
+    <li>👉 GitHub for collaboration + GitHub Pages for hosting</li>
+  </ul>
+
+  <h2>Random Dog Just for Fun</h2>
+  <button id="funBtn">Show me another!</button>
+  <div id="funImg" style="margin-top:20px;"></div>
+
+  <script>
+    const funBtn = document.getElementById('funBtn');
+    const funImg = document.getElementById('funImg');
+    const spinner = '<div class="spinner"></div>';
+
+    async function loadRandom() {
+      funImg.innerHTML = spinner;
+      const res = await fetch('https://dog.ceo/api/breeds/image/random');
+      funImg.innerHTML = `<img src="${(await res.json()).message}" style="max-width:300px;border-radius:10px;" alt="random dog">`;
+    }
+    funBtn.addEventListener('click', loadRandom);
+    loadRandom(); // first load
+  </script>
+</body>
+</html>
